@@ -1,9 +1,9 @@
 import cors from 'cors';
 import express, { Application } from 'express';
 import morgan from 'morgan';
-import rootRouter from './routes';
-import notFound from './middlewares/notFound';
 import globalErrorHandler from './middlewares/globalErrorhandler';
+import notFound from './middlewares/notFound';
+import rootRouter from './routes';
 
 const app: Application = express();
 
@@ -14,6 +14,10 @@ app.use(cors({ origin: ['http://localhost:5173', 'https://inventory-navy.vercel.
 
 // application routes
 app.use('/api/v1', rootRouter);
+
+app.get("/", (req, res) => {
+  res.send("Server is running");
+})
 
 app.use(globalErrorHandler);
 
