@@ -4,14 +4,19 @@
   "description": "A full stack Inventory management system",
   "main": "server.js",
   "scripts": {
-    "start": "node ./dist/server.js",
+    "start": "npx nodemon src/server.ts",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
+    "build": "rimraf dist && tsc",
     "lint": "eslint src --ignore-path .eslintignore --ext .ts",
     "lint:fix": "npx eslint src --fix",
     "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
     "format:fix": "npx prettier --write src"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -33,7 +38,9 @@
     "@typescript-eslint/parser": "^6.11.0",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^3.1.0",
+    "rimraf": "^6.0.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   },
