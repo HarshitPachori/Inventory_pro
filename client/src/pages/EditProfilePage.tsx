@@ -8,51 +8,50 @@ import CustomInput from '../components/CustomInput';
 import Loader from '../components/Loader';
 import { profileInputFields } from '../constant/profile';
 import { useGetSelfProfileQuery, useUpdateProfileMutation } from '../redux/features/authApi';
-import { config } from '../utils/config';
 
 const EditProfilePage = () => {
   const { data, isLoading } = useGetSelfProfileQuery(undefined);
-  const [updateProfile] = useUpdateProfileMutation();
+  // const [updateProfile] = useUpdateProfileMutation();
   const navigate = useNavigate();
 
   if (isLoading) {
     return <Loader />;
   }
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const toastId = toast.loading('Uploading Image...');
+  // const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const toastId = toast.loading('Uploading Image...');
 
-    const image = e.target.files?.[0] as any;
-    const data = new FormData();
-    data.append('file', image);
-    data.append('upload_preset', config.VITE_CLOUDINARY_UPLOAD_PRESET as string);
-    data.append('cloud_name', config.VITE_CLOUDINARY_CLOUD_NAME as string);
-    data.append('folder', 'inventory');
+  //   const image = e.target.files?.[0] as any;
+  //   const data = new FormData();
+  //   data.append('file', image);
+  //   data.append('upload_preset', config.VITE_CLOUDINARY_UPLOAD_PRESET as string);
+  //   data.append('cloud_name', config.VITE_CLOUDINARY_CLOUD_NAME as string);
+  //   data.append('folder', 'inventory');
 
-    try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${config.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
-        {
-          method: 'POST',
-          body: data,
-        }
-      );
-      const res = await response.json();
+  //   try {
+  //     const response = await fetch(
+  //       `https://api.cloudinary.com/v1_1/${config.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+  //       {
+  //         method: 'POST',
+  //         body: data,
+  //       }
+  //     );
+  //     const res = await response.json();
 
-      if (res.secure_url) {
-        const imgUploadRes = await updateProfile({ avatar: res.secure_url }).unwrap();
+  //     if (res.secure_url) {
+  //       const imgUploadRes = await updateProfile({ avatar: res.secure_url }).unwrap();
 
-        if (imgUploadRes.success) {
-          toast.success('Profile updated successfully', { id: toastId });
-        }
-        toast.success('Image Uploaded Successfully, now save update!', { id: toastId });
-      } else {
-        toast.error('Failed to Upload Image', { id: toastId });
-      }
-    } catch (error) {
-      toast.error('Failed to Upload Image', { id: toastId });
-    }
-  };
+  //       if (imgUploadRes.success) {
+  //         toast.success('Profile updated successfully', { id: toastId });
+  //       }
+  //       toast.success('Image Uploaded Successfully, now save update!', { id: toastId });
+  //     } else {
+  //       toast.error('Failed to Upload Image', { id: toastId });
+  //     }
+  //   } catch (error) {
+  //     toast.error('Failed to Upload Image', { id: toastId });
+  //   }
+  // };
 
   return (
     <Row>
