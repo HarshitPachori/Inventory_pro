@@ -4,13 +4,14 @@
   "description": "A full stack Inventory management system",
   "main": "server.js",
   "scripts": {
-    "start": "npx nodemon src/server.ts",
+    "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "rimraf dist && tsc",
     "lint": "eslint src --ignore-path .eslintignore --ext .ts",
     "lint:fix": "npx eslint src --fix",
     "format": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
-    "format:fix": "npx prettier --write src"
+    "format:fix": "npx prettier --write src",
+    "vercel-build": "npm run build"  
   },
   "pre-commit": [
     "ts.check",
