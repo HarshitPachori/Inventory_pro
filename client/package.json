@@ -37,12 +37,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
-  "homepage": "https://github.com/mhShohan/inventory-management-system",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mhShohan/inventory-management-system.git"
-  },
-  "author": "mhShohan",
   "license": "MIT",
   "keywords": [
     "inventory management system",

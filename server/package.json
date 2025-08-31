@@ -37,12 +37,6 @@
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   },
-  "homepage": "https://github.com/mhShohan/inventory-management-system",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mhShohan/inventory-management-system.git"
-  },
-  "author": "mhShohan",
   "license": "MIT",
   "keywords": [
     "inventory management system",
