@@ -11,7 +11,7 @@ import { ITableExpense } from '../../types/expense.types';
 
 const ExpenseManagementPage = () => {
   const [current, setCurrent] = useState(1);
-  const [query, setQuery] = useState({
+  const [query] = useState({
     name: '',
     limit: 10,
   });
