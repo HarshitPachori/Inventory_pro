@@ -44,6 +44,7 @@ class ProductServices extends BaseServices<any> {
             productName: product[0]?.name,
             quantity: product[0]?.stock,
             unitPrice: product[0]?.price,
+            sellPrice: product[0]?.sellPrice,
             totalPrice: product[0]?.stock * product[0]?.price
           }
         ],
@@ -156,6 +157,7 @@ class ProductServices extends BaseServices<any> {
             productName: product.name,
             quantity: Number(product.stock),
             unitPrice: Number(product.price),
+            sellPrice: Number(product.sellPrice),
             totalPrice: Number(product.stock) * Number(product.price)
           }
         ],

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import httpStatus from 'http-status';
 import { Model } from 'mongoose';
 import CustomError from '../errors/customError';
-import httpStatus from 'http-status';
 
 class BaseServices<T> {
   protected model: Model<T>;

@@ -40,6 +40,7 @@ const ProductManagePage = () => {
     category: product.category,
     categoryName: product.category.name,
     price: product.price,
+    sellPrice: product.sellPrice,
     stock: product.stock,
     seller: product?.seller,
     sellerName: product?.seller?.name || 'DELETED SELLER',
@@ -68,9 +69,15 @@ const ProductManagePage = () => {
       align: 'center',
     },
     {
-      title: 'Price',
+      title: 'Cost Price',
       key: 'price',
       dataIndex: 'price',
+      align: 'center',
+    },
+    {
+      title: 'Sell Price',
+      key: 'sellPrice',
+      dataIndex: 'sellPrice',
       align: 'center',
     },
     {
@@ -146,27 +153,36 @@ const SellProductModal = ({ product }: { product: IProduct & { key: string } }) 
       buyerName: '',
       date: '',
       quantity: 1, // Default quantity
-      totalAmount: product?.price || 0, // Initial default based on price
+      totalAmount: product?.sellPrice || 0, // Initial default based on price
       amountPaid: 0,
       amountRem: 0,
       dueDate:"",
-      pricePerPc:product?.price
+      pricePerPc:product?.price,
+      sellPrice:product?.sellPrice,
+      profit:product.price ? (product?.sellPrice - product?.price) : 0
     }
   });
-  const [saleProduct, { isLoading }] = useCreateSaleMutation();
+const [saleProduct, { isLoading }] = useCreateSaleMutation();
 const quantity = watch('quantity')
 const amountRemaining = watch('amountRem')
 const amountPaid = watch('amountPaid')
+const sellPrice = watch('sellPrice')
+
 
   useEffect(() => {
-    const total = Number(quantity) * (product?.price || 0);
+    const total = Number(quantity) * (sellPrice || 0);
     setValue('totalAmount', isNaN(total) ? 0 : total);
-  }, [quantity, product?.price, setValue]);
+  }, [quantity, setValue,sellPrice]);
 
     useEffect(() => {
-    const total = product?.price * quantity - amountPaid;
+    const total = sellPrice * quantity - amountPaid;
     setValue('amountRem',( isNaN(total) || total < 0) ? 0 : total);
-  }, [amountRemaining, amountPaid, setValue]);
+  }, [amountRemaining, amountPaid, setValue,sellPrice,quantity]);
+
+  useEffect(() => {
+    const profit = (sellPrice || 0) - (product?.price || 0);
+    setValue('profit', isNaN(profit) ? 0 : profit);
+  }, [sellPrice, setValue,product?.price]);
 
   const onSubmit = async (data: FieldValues) => {
     const payload = {
@@ -178,7 +194,8 @@ const amountPaid = watch('amountPaid')
       date: data.date,
       dueDate:data.dueDate,
       amountPaid:data.amountPaid,
-      amountRem:data.amountRem
+      amountRem:data.amountRem,
+      sellPrice: data.sellPrice,
     };
     try {
       const res = await saleProduct(payload).unwrap();
@@ -211,7 +228,7 @@ const amountPaid = watch('amountPaid')
       >
         Sell
       </Button>
-      <Modal title='Sell Product' open={isModalOpen} onCancel={handleCancel} footer={null}>
+      <Modal title='Sell Product' open={isModalOpen} onCancel={handleCancel} footer={null} style={{ maxHeight:'80vh' ,overflowY:'auto'}}>
         <form onSubmit={handleSubmit(onSubmit)} style={{ marginTop: '1rem' }}>
           <CustomInput
             name='buyerName'
@@ -231,12 +248,28 @@ const amountPaid = watch('amountPaid')
           />
            <CustomInput
             name='pricePerPc'
-            label='Price Per Pc'
+            label='Cost Price Per Pc'
             errors={errors}
             required={true}
             register={register}
             type='number'
             readOnly
+          />
+           <CustomInput
+            name='sellPrice'
+            label='Sell Price Per Pc'
+            errors={errors}
+            required={true}
+            register={register}
+            type='number'
+          />
+           <CustomInput
+            name='profit'
+            label='Profit'
+            errors={errors}
+            required={true}
+            register={register}
+            type='number'
           />
           <CustomInput
             name='quantity'
@@ -255,7 +288,7 @@ const amountPaid = watch('amountPaid')
             register={register}
             type='number'
             readOnly
-            defaultValue={  product?.price}
+            defaultValue={  product?.sellPrice}
           />
            <CustomInput
             name='amountPaid'

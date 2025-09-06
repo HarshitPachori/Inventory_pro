@@ -10,6 +10,7 @@ const productSchema = new Schema<IProduct>(
     size: { type: String, enum: ['SMALL', 'MEDIUM', 'LARGE'] },
     brand: { type: Schema.Types.ObjectId, ref: 'brand' },
     price: { type: Number, required: true },
+    sellPrice: { type: Number, required: true },
     stock: { type: Number, required: true },
     description: { type: String }
   },

@@ -10,6 +10,7 @@ const saleSchema = new Schema<ISale>(
     quantity: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
     productPrice: { type: Number, required: true },
+    sellPrice: { type: Number, required: true },
     date: { type: Date, required: true },
     dueDate:{type: Date, required: false},
     amountPaid:{type: Number, required: true}

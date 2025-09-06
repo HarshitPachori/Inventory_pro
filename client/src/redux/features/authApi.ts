@@ -8,7 +8,7 @@ const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: ['product', 'sale', 'user']
+      invalidatesTags: ['product', 'sale', 'user','expense']
     }),
 
     register: builder.mutation({
@@ -17,7 +17,7 @@ const authApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload
       }),
-      invalidatesTags: ['product', 'sale', 'user']
+      invalidatesTags: ['product', 'sale', 'user','expense']
     }),
 
     getSelfProfile: builder.query({

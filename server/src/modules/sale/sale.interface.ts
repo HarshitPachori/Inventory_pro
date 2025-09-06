@@ -9,6 +9,7 @@ export interface ISale {
   buyerName: string;
   date: Date;
   totalPrice: number;
+  sellPrice:number;
   dueDate:Date;
   amountPaid:number;
 }

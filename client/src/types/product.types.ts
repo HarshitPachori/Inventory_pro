@@ -5,6 +5,7 @@ export type IProduct = {
   category: ICategory
   brand?: IBrand
   price: number
+  sellPrice: number
   size?: string
   stock: number
   seller: ISeller

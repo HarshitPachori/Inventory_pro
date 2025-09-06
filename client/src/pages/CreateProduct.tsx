@@ -1,16 +1,16 @@
+import { SpinnerIcon } from '@phosphor-icons/react';
 import { Button, Col, Flex, Row } from 'antd';
 import { FieldValues, useForm } from 'react-hook-form';
 import CustomInput from '../components/CustomInput';
+import CreateBrand from '../components/product/CreateBrand';
+import CreateCategory from '../components/product/CreateCategory';
+import CreateSeller from '../components/product/CreateSeller';
 import toastMessage from '../lib/toastMessage';
 import { useGetAllBrandsQuery } from '../redux/features/management/brandApi';
 import { useGetAllCategoriesQuery } from '../redux/features/management/categoryApi';
 import { useCreateNewProductMutation } from '../redux/features/management/productApi';
 import { useGetAllSellerQuery } from '../redux/features/management/sellerApi';
 import { ICategory } from '../types/product.types';
-import CreateSeller from '../components/product/CreateSeller';
-import CreateCategory from '../components/product/CreateCategory';
-import CreateBrand from '../components/product/CreateBrand';
-import { SpinnerIcon } from '@phosphor-icons/react';
 
 const CreateProduct = () => {
   const [createNewProduct, { isLoading: isCreatingProduct }] = useCreateNewProductMutation();
@@ -90,9 +90,17 @@ const CreateProduct = () => {
               />
               <CustomInput
                 errors={errors}
-                label='Price'
+                label='Cost Price'
                 type='number'
                 name='price'
+                register={register}
+                required={true}
+              />
+              <CustomInput
+                errors={errors}
+                label='Sell Price'
+                type='number'
+                name='sellPrice'
                 register={register}
                 required={true}
               />

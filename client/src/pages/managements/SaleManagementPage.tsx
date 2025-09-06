@@ -47,6 +47,7 @@ const SaleManagementPage = () => {
     key: sale._id,
     productName: sale.productName,
     productPrice: sale.productPrice,
+    sellPrice:sale.sellPrice,
     buyerName: sale.buyerName,
     quantity: sale.quantity,
     totalPrice: sale.totalPrice,
@@ -54,6 +55,7 @@ const SaleManagementPage = () => {
     dueDate: formatDate(sale.dueDate),
     amountPaid: sale.amountPaid || 0,
     amountRemaining: sale.totalPrice - (sale.amountPaid || 0),
+  
   }));
 
   const columns: TableColumnsType<any> = [
@@ -63,9 +65,15 @@ const SaleManagementPage = () => {
       dataIndex: 'productName',
     },
     {
-      title: 'Product Price',
+      title: 'Product Cost Price',
       key: 'productPrice',
       dataIndex: 'productPrice',
+      align: 'center',
+    },
+    {
+      title: 'Product Sell Price',
+      key: 'sellPrice',
+      dataIndex: 'sellPrice',
       align: 'center',
     },
     {

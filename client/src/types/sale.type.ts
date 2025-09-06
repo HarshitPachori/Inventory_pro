@@ -14,6 +14,7 @@ export interface ITableSale {
     price: number;
   }
   productPrice: number;
+  sellPrice:number;
   productName: string;
   quantity: number;
   buyerName: string;

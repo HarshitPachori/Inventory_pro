@@ -8,6 +8,7 @@ import {
   ProfileFilled,
   UserOutlined,
 } from '@ant-design/icons';
+import { NotebookIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -46,6 +47,11 @@ export const sidebarItems = [
     key: 'Sales History',
     label: <NavLink to='/sales-history'>SALES HISTORY</NavLink>,
     icon: React.createElement(HistoryOutlined),
+  },
+  {
+    key: 'Manage Expenses',
+    label: <NavLink to='/expenses'>MANAGE EXPENSES</NavLink>,
+    icon: React.createElement(NotebookIcon),
   },
   {
     key: 'Profile',

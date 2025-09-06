@@ -8,6 +8,7 @@ export interface IProduct {
   brand?: Types.ObjectId;
   size?: string;
   price: number;
+  sellPrice: number;
   stock: number;
   description: string;
 }
